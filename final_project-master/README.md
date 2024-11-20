@@ -38,7 +38,16 @@ My game is going to be a pet simulator. I want the user to be able to click butt
 
 ### Classes
 
-- << You should have a list of each of your classes with a description >>
+- StartMenu:
+    - Creates start menu screen with bar to type pet name in, cat or dog selection button, and start button
+- Pet:
+    - Creates pet objects for cat and dog selection importing a picture as the pet on screen
+- StatusBar:
+    - Creates status bars for health, happiness, and hunger that deplete with time and determine the life of the pet
+- Game:
+    - Creates game screen where the pet, buttons, and status bars are and the user can interact with the buttons
+- Controller:
+    - Puts the objects together, creating the game itself and a game over screen
 
 ## ATP
 
