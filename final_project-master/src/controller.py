@@ -25,6 +25,12 @@ class Controller:
         Returns: None
         """
         print("Starting main loop")
+        
+        pygame.mixer.init()   
+        music_file = os.path.join("assets", "music", "background_music.mp3")
+        pygame.mixer.music.load(music_file)
+        pygame.mixer.music.play(loops=-1, start=0.0)
+               
         start_menu = StartMenu(self.screen, self.font)
         while start_menu.is_active:
             events = pygame.event.get()
@@ -61,11 +67,18 @@ class Controller:
             game (object): game model
         Returns: None
         """
+        background_image_path = os.path.join("assets", "images", "game_over_background.webp")
+        background = pygame.image.load(background_image_path)
+        background = pygame.transform.scale(background, (800, 600))
+        
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
-        font = pygame.font.Font(font_path, 30)
-        game_over_text = font.render("Game Over! Press 'R' to restart or 'Q' to quit.", True, (255, 0, 0))
-        self.screen.fill((0, 0, 0))
-        self.screen.blit(game_over_text, (150, 250))
+        font = pygame.font.Font(font_path, 20)
+        game_over_text = font.render("Game Over!", True, (86, 179, 43))
+        option_game_over_text = font.render("Press 'R' to restart or 'Q' to quit.", True, (86, 179, 43))
+        
+        self.screen.blit(background, (0, 0))        
+        self.screen.blit(game_over_text, (290, 250))
+        self.screen.blit(option_game_over_text, (110, 300))
         pygame.display.flip()
         
         waiting_for_input = True

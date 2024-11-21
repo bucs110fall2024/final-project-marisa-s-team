@@ -28,9 +28,9 @@ class Game:
         self.happiness_bar = StatusBar(500, 140, 300, 40, 100, "Happiness", 0.003)
         
         if self.selected_pet == 'cat':
-            self.pet = Pet(350, 250, "assets/cat.png")
+            self.pet = Pet(350, 250, "assets/images/cat.png")
         elif self.selected_pet == 'dog':
-            self.pet = Pet(350, 250, "assets/dog.png")
+            self.pet = Pet(350, 250, "assets/images/dog.png")
             
         self.buttons = {
             'play': pygame.Rect(50, 460, 100, 50),
@@ -80,14 +80,17 @@ class Game:
         self.health_bar.update(delta_time)
         self.hunger_bar.update(delta_time)
         self.happiness_bar.update(delta_time)
-            
+        
     def draw(self):
         """
         Draws screen, buttons, and status bars
         Args: None
         Returns: None
         """
-        self.screen.fill((232, 153, 227))
+        background_image_path = os.path.join("assets", "images", "start_menu_background.jpg")
+        background = pygame.image.load(background_image_path)
+        background = pygame.transform.scale(background, (800, 600))
+        self.screen.blit(background, (0, 0))
         
         self.pet.draw(self.screen)
         
@@ -103,19 +106,19 @@ class Game:
         self.hunger_bar.draw(self.screen)
         self.happiness_bar.draw(self.screen)
         
-        pygame.draw.rect(self.screen, (0, 255, 0), self.buttons['play'])
-        pygame.draw.rect(self.screen, (0, 255, 0), self.buttons['feed'])
-        pygame.draw.rect(self.screen, (0, 255, 0), self.buttons['pet'])
+        pygame.draw.rect(self.screen, (184, 245, 241), self.buttons['play'])
+        pygame.draw.rect(self.screen, (184, 245, 241), self.buttons['feed'])
+        pygame.draw.rect(self.screen, (184, 245, 241), self.buttons['pet'])
             
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         button_font = pygame.font.Font(font_path, 20)
-        play_text = button_font.render("Play", True, (0, 0, 0))
-        feed_text = button_font.render("Feed", True, (0, 0, 0))
-        pet_text = button_font.render("Pet", True, (0, 0, 0))
+        play_text = button_font.render("Play", True, (255, 255, 255))
+        feed_text = button_font.render("Feed", True, (255, 255, 255))
+        pet_text = button_font.render("Pet", True, (255, 255, 255))
         
-        self.screen.blit(play_text, (self.buttons['play'].x + 30, self.buttons['play'].y + 15))
-        self.screen.blit(feed_text, (self.buttons['feed'].x + 30, self.buttons['feed'].y + 15))
-        self.screen.blit(pet_text, (self.buttons['pet'].x + 35, self.buttons['pet'].y + 15))
+        self.screen.blit(play_text, (self.buttons['play'].x + 10, self.buttons['play'].y + 15))
+        self.screen.blit(feed_text, (self.buttons['feed'].x + 10, self.buttons['feed'].y + 15))
+        self.screen.blit(pet_text, (self.buttons['pet'].x + 20, self.buttons['pet'].y + 15))
         
     def is_game_over(self):
         """

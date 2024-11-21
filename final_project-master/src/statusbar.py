@@ -48,6 +48,6 @@ class StatusBar():
         pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, self.w * ratio, self.h))
         
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
-        font = pygame.font.SysFont(font_path, 20)
+        font = pygame.font.Font(font_path, 10)
         label_text = font.render(self.label, True, (255, 255, 255))
-        screen.blit(label_text, (self.x, self.y - 25))
+        screen.blit(label_text, (self.x, self.y - 15))

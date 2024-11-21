@@ -16,8 +16,8 @@ class Pet:
         self.image = pygame.transform.scale(self.image, (350, 350))
         
         self.alive = True
-        self.hunger = 100
         self.health = 100
+        self.hunger = 100
         self.happiness = 100
     
     def update(self):
@@ -27,10 +27,10 @@ class Pet:
         Returns: None
         """
         if self.alive:
-            if self.hunger > 0:
-                self.hunger -= 0.05
             if self.health > 0:
                 self.health -= 0.03
+            if self.hunger > 0:
+                self.hunger -= 0.05
             if self.happiness > 0:
                 self.happiness -= 0.05
             
@@ -45,6 +45,15 @@ class Pet:
         """
         self.alive = False
         
+    def play(self):
+        """
+        Defines how long the pet can go without being played with before health depletes
+        Args: None
+        Returns: None
+        """
+        if self.alive:
+            self.health = min(self.health + 15, 100)  
+              
     def feed(self):
         """
         Defines how hungry pet can be before hunger depletes
@@ -62,24 +71,15 @@ class Pet:
         """
         if self.alive:
             self.happiness = min(self.happiness + 10, 100)
-            
-    def play(self):
-        """
-        Defines how long the pet can go without being played with before health depletes
-        Args: None
-        Returns: None
-        """
-        if self.alive:
-            self.health = min(self.health + 15, 100)
     
     def get_status(self):
         """
-        Gets status of pet's hunger, health, and happiness
+        Gets status of pet's health, hunger, and happiness
         Args: None
         Returns:
-            self.hunger, self.health, self.happiness: status of pet's bars
+            self.health, self.hunger, self.happiness: status of pet's bars
         """
-        return (self.hunger, self.health, self.happiness)
+        return (self.health, self.hunger, self.happiness)
     
     def draw(self, screen):
         """
@@ -88,4 +88,4 @@ class Pet:
             screen (display): screen blit
         Returns: None
         """
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.image, (self.x - 80, self.y - 20))

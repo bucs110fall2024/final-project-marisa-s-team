@@ -1,4 +1,5 @@
 import pygame
+import os
 
 class StartMenu:
     def __init__(self, screen, font):
@@ -65,26 +66,30 @@ class StartMenu:
         Args: None
         Returns: None
         """
-        self.screen.fill((232, 153, 227))
+        image_file = os.path.join("assets", "images", "game_background.jpg")
+        background = pygame.image.load(image_file)
+        background = pygame.transform.scale(background, (800, 600))
+        self.screen.blit(background, (0, 0))        
+        title = self.font.render("Pixel Paws Pet Simulator", True, (60, 75, 105))
+        self.screen.blit(title, (85, 50))
         
-        title = self.font.render("Pixel Paws Pet Simulator", True, (255, 255, 255))
-        self.screen.blit(title, (300, 50))
-        
-        pygame.draw.rect(self.screen, (255, 255, 255), self.cat_button)
-        pygame.draw.rect(self.screen, (255, 255, 255), self.dog_button)
+        pygame.draw.rect(self.screen, (219, 128, 64), self.cat_button)
+        pygame.draw.rect(self.screen, (97, 64, 42), self.dog_button)
 
-        cat_text = self.font.render("Cat", True, (0, 0, 0))
-        dog_text = self.font.render("Dog", True, (0, 0, 0))
-        self.screen.blit(cat_text, (self.cat_button.x + 35, self.cat_button.y + 15))
-        self.screen.blit(dog_text, (self.dog_button.x + 35, self.dog_button.y + 15))
+        cat_text = self.font.render("Cat", True, (255, 255, 255))
+        dog_text = self.font.render("Dog", True, (255, 255, 255))
+        self.screen.blit(cat_text, (self.cat_button.x + 5, self.cat_button.y + 10))
+        self.screen.blit(dog_text, (self.dog_button.x + 5, self.dog_button.y + 10))
         
-        pygame.draw.rect(self.screen, (255, 255, 255), self.input_box, 2)
-        input_text = self.font.render(self.pet_name, True, (255, 255, 255))
+        pygame.draw.rect(self.screen, (60, 75, 105), self.input_box, 2)
+        input_text = self.font.render(self.pet_name, True, (60, 75, 105))
+        name_text = self.font.render("Name Your Pet:", True, (60, 75, 105))
+        self.screen.blit(name_text, (self.input_box.x - 85, self.input_box.y - 50))
         self.screen.blit(input_text, (self.input_box.x + 5, self.input_box.y + 5))
         
-        pygame.draw.rect(self.screen, (0, 255, 0), self.start_button)
-        start_text = self.font.render("Start", True, (0, 0, 0))
-        self.screen.blit(start_text, (self.start_button.x + 80, self.start_button.y + 15))
+        pygame.draw.rect(self.screen, (155, 222, 140), self.start_button)
+        start_text = self.font.render("Start", True, (255, 255, 255))
+        self.screen.blit(start_text, (self.start_button.x + 20, self.start_button.y + 10))
         
     def get_pet_name(self):
         """
