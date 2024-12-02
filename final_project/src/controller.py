@@ -1,5 +1,6 @@
 import pygame
 import os
+import sys
 from src.startmenu import StartMenu
 from src.game import Game
 
@@ -35,30 +36,46 @@ class Controller:
         while start_menu.is_active:
             events = pygame.event.get()
             start_menu.handle_events(events)
+            
+            for event in events:
+                if event.type == pygame.QUIT:
+                    start_menu.is_active = False
+                    self.is_running = False
+                    break
+            
             start_menu.draw()
             pygame.display.flip()
-        
+            
         pet_name = start_menu.get_pet_name()
         selected_pet = start_menu.get_selected_pet()
         print(f"Pet Name: {pet_name}, Selected Pet: {selected_pet}")
         
         game = Game(self.screen, self.font, pet_name, selected_pet, start_menu.cat_button, start_menu.dog_button, start_menu.start_button)
-        
+            
         while self.is_running:
             events = pygame.event.get()
+            
             game.handle_events(events)
+            
+            for event in events:
+                if event.type == pygame.QUIT:
+                    self.is_running = False
+                    break
+                
+            delta_time = pygame.time.get_ticks() / 1000.0
+            game.update(delta_time)
+            game.draw()
             
             if game.is_game_over():
                 self.game_over(game)
                 break
             
-            delta_time = pygame.time.get_ticks() / 1000.0
-            game.update(delta_time)
-            game.draw()
-            
             pygame.display.flip()
         
         print("Exiting main loop")
+        
+        pygame.quit()
+        sys.exit()
         
     def game_over(self, game):
         """
@@ -73,7 +90,7 @@ class Controller:
         
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         font = pygame.font.Font(font_path, 20)
-        game_over_text = font.render("Game Over!", True, (86, 179, 43))
+        game_over_text = font.render(f"{game.pet_name} Died!", True, (86, 179, 43))
         option_game_over_text = font.render("Press 'R' to restart or 'Q' to quit.", True, (86, 179, 43))
         
         self.screen.blit(background, (0, 0))        

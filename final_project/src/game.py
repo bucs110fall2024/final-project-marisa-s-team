@@ -44,32 +44,26 @@ class Game:
         Args:
             events (event): events that occur within game
         Returns: None
-        """
+        """        
         for event in events:
             if event.type == pygame.QUIT:
+                print("Quit event detected") #
                 self.running = False
-                
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.buttons['pet'].collidepoint(event.pos):
                     self.pet.pet()
+                    self.happiness_bar.value = self.pet.happiness
                     print(f"Happiness: {self.pet.happiness}")
                 elif self.buttons['feed'].collidepoint(event.pos):
                     self.pet.feed()
+                    self.hunger_bar.value = self.pet.hunger
                     print(f"Hunger: {self.pet.hunger}")
                 elif self.buttons['play'].collidepoint(event.pos):
                     self.pet.play()
+                    self.health_bar.value = self.pet.health
                     print(f"Health: {self.pet.health}")
-                
-            if event.type == pygame.KEYDOWN:
-                if self.active_input:
-                    if event.key == pygame.K_BACKSPACE:
-                        self.pet_name = self.pet_name[:-1]
-                    elif event.key == pygame.K_RETURN:
-                        if self.pet_name:
-                            self.is_active = False
-                    else:
-                        self.pet_name += event.unicode
-                        
+
     def update(self, delta_time):
         """
         Updates status bars
@@ -80,6 +74,12 @@ class Game:
         self.health_bar.update(delta_time)
         self.hunger_bar.update(delta_time)
         self.happiness_bar.update(delta_time)
+        
+        if self.is_game_over():
+            self.running = False
+            return True
+        
+        return False
         
     def draw(self):
         """
@@ -95,12 +95,9 @@ class Game:
         self.pet.draw(self.screen)
         
         hunger, health, happiness = self.pet.get_status()
-            
-        delta_time = pygame.time.get_ticks() / 1000.0
-        
-        self.health_bar.update(delta_time)
-        self.hunger_bar.update(delta_time)
-        self.happiness_bar.update(delta_time)
+        self.health_bar.value = health
+        self.hunger_bar.value = hunger
+        self.happiness_bar.value = happiness
         
         self.health_bar.draw(self.screen)
         self.hunger_bar.draw(self.screen)
@@ -120,6 +117,9 @@ class Game:
         self.screen.blit(feed_text, (self.buttons['feed'].x + 10, self.buttons['feed'].y + 15))
         self.screen.blit(pet_text, (self.buttons['pet'].x + 20, self.buttons['pet'].y + 15))
         
+        pet_name_text = self.font.render(f"Pet Name: {self.pet_name}", True, (255, 255, 255))
+        self.screen.blit(pet_name_text, (10, 10))
+        
     def is_game_over(self):
         """
         Determines whether game is over
@@ -127,5 +127,3 @@ class Game:
             self.health_bar.value, self.hunger_bar.value, self.happiness_bar.value: values of pet's attributes
         """
         return self.health_bar.value == 0 or self.hunger_bar.value == 0 or self.happiness_bar.value == 0
-            
-        

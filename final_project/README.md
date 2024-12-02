@@ -56,3 +56,15 @@ My game is going to be a pet simulator. I want the user to be able to click butt
 |  1                   | Run Counter Program  |GUI window appears with count = 0  |
 |  2                   | click count button   | display changes to count = 1      |
 etc...
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    print("Q key pressed")
+                    self.running = False
+                elif event.key == pygame.K_BACKSPACE:
+                    self.pet_name = self.pet_name[:-1]
+                elif event.key == pygame.K_RETURN:
+                    if self.pet_name:
+                        self.is_active = False
+                    else:
+                        self.pet_name += event.unicode

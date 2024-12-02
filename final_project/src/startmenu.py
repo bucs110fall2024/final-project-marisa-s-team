@@ -33,6 +33,7 @@ class StartMenu:
             if event.type == pygame.QUIT:
                 self.is_active = False
                 print("Quit event detected")
+                return
                 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.cat_button.collidepoint(event.pos):

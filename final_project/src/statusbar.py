@@ -31,9 +31,10 @@ class StatusBar():
             delta_time (int): time
         Returns: None
         """
-        self.value -= self.depletion_rate * delta_time
-        if self.value < 0:
-            self.value = 0
+        if self.value > 0:
+            self.value -= self.depletion_rate * delta_time
+            if self.value < 0:
+                self.value = 0
                
     def draw(self, screen):
         """
@@ -44,8 +45,8 @@ class StatusBar():
         """
         pygame.draw.rect(screen, (255, 0, 0), (self.x, self.y, self.w, self.h))
         
-        ratio = self.value / self.max_value
-        pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, self.w * ratio, self.h))
+        fill_width = (self.value / self.max_value) * self.w
+        pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, self.w * fill_width, self.h))
         
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         font = pygame.font.Font(font_path, 10)
