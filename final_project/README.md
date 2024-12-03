@@ -30,11 +30,11 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 
 ### Features
 
-1. Animal on screen
-2. Three buttons for user to click
-3. Updating health, happiness, and hunger bar that continuously deplete until user hits buttons
-4. Game over screen
-5. Start menu including naming pet
+1. Start menu that lets user name pet, and select whether they want a cat or dog pet
+2. Main game screen which has pet on it and pet's name on top of screen
+3. Three buttons for user to click on game screen (play, feed, and pet) to up status bars and cause item to go on screen
+4. Updating health, hunger, and happiness bar that continuously deplete until user hits buttons
+5. Game over screen allowing user to restart or quit
 
 ### Classes
 
