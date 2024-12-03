@@ -7,20 +7,25 @@ class Pet:
         Args:
             x (int): x-coordinate
             y (int): y-coordinate
-            image_path (path): image path
+            image_path (str): path to pet image
         Returns: None
         """
         self.x = x
         self.y = y
-        self.image = pygame.image.load(image_path)
+        self.image_path = image_path
+        
+        self.image = pygame.image.load(image_path) 
         self.image = pygame.transform.scale(self.image, (350, 350))
         
         self.alive = True
         self.health = 100
         self.hunger = 100
         self.happiness = 100
+        self.health_depletion_rate = 0.00001
+        self.hunger_depletion_rate = 0.000005
+        self.happiness_depletion_rate = 0.003
     
-    def update(self):
+    def update(self, delta_time):
         """
         Updates hunger, health, and happiness of pet
         Args: None
@@ -34,9 +39,19 @@ class Pet:
             if self.happiness > 0:
                 self.happiness -= 0.05
             
-        if self.hunger <= 0 or self.health <= 0 or self.happiness <=0:
+        if self.hunger <= 0 or self.health <= 0 or self.happiness <= 0:
             self.die()
             
+        # print(f"Health: {self.health}, Hunger: {self.hunger}, Happiness: {self.happiness}") #
+
+        self.health -= self.health_depletion_rate * delta_time
+        self.hunger -= self.hunger_depletion_rate * delta_time
+        self.happiness -= self.happiness_depletion_rate * delta_time
+            
+        self.health = max(0, self.health)
+        self.hunger = max(0, self.hunger)
+        self.happiness = max(0, self.happiness)
+        
     def die(self):
         """
         Defines death of pet
@@ -51,8 +66,9 @@ class Pet:
         Args: None
         Returns: None
         """
-        if self.alive:
-            self.health = min(self.health + 15, 100)  
+        # if self.alive:
+            # self.health = min(self.health + 15, 100)  
+        self.health = min(100, self.health + 10)
               
     def feed(self):
         """
@@ -60,8 +76,9 @@ class Pet:
         Args: None
         Returns: None
         """
-        if self.alive:
-            self.hunger = min(self.hunger + 20, 100)
+        # if self.alive:
+            # self.hunger = min(self.hunger + 20, 100)
+        self.hunger = min(100, self.hunger + 20)
     
     def pet(self):
         """
@@ -69,8 +86,9 @@ class Pet:
         Args: None
         Returns: None
         """
-        if self.alive:
-            self.happiness = min(self.happiness + 10, 100)
+        # if self.alive:
+            # self.happiness = min(self.happiness + 10, 100)
+        self.happiness = min(100, self.happiness + 10)
     
     def get_status(self):
         """
@@ -79,8 +97,8 @@ class Pet:
         Returns:
             self.health, self.hunger, self.happiness: status of pet's bars
         """
-        return (self.health, self.hunger, self.happiness)
-    
+        return self.health, self.hunger, self.happiness
+        
     def draw(self, screen):
         """
         Draws image of pet

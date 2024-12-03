@@ -84,18 +84,18 @@ class Controller:
             game (object): game model
         Returns: None
         """
-        background_image_path = os.path.join("assets", "images", "game_over_background.webp")
+        background_image_path = os.path.join("assets", "images", "game_over_background.jpg")
         background = pygame.image.load(background_image_path)
         background = pygame.transform.scale(background, (800, 600))
         
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         font = pygame.font.Font(font_path, 20)
-        game_over_text = font.render(f"{game.pet_name} Died!", True, (86, 179, 43))
-        option_game_over_text = font.render("Press 'R' to restart or 'Q' to quit.", True, (86, 179, 43))
+        game_over_text = font.render(f"{game.pet_name} Died!", True, (255, 255, 0))
+        option_game_over_text = font.render("Press 'R' to restart or 'Q' to quit.", True, (255, 255, 0))
         
         self.screen.blit(background, (0, 0))        
-        self.screen.blit(game_over_text, (290, 250))
-        self.screen.blit(option_game_over_text, (110, 300))
+        self.screen.blit(game_over_text, (290, 100))
+        self.screen.blit(option_game_over_text, (110, 150))
         pygame.display.flip()
         
         waiting_for_input = True

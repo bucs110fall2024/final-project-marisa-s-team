@@ -31,6 +31,7 @@ class StatusBar():
             delta_time (int): time
         Returns: None
         """
+        # print(f"Updated {self.label} - Current Value: {self.value}")
         if self.value > 0:
             self.value -= self.depletion_rate * delta_time
             if self.value < 0:
@@ -46,7 +47,7 @@ class StatusBar():
         pygame.draw.rect(screen, (255, 0, 0), (self.x, self.y, self.w, self.h))
         
         fill_width = (self.value / self.max_value) * self.w
-        pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, self.w * fill_width, self.h))
+        pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, fill_width, self.h))
         
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         font = pygame.font.Font(font_path, 10)

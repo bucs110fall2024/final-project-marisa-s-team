@@ -12,7 +12,7 @@ Marisa Keefe
 
 ## Project Description
 
-My game is going to be a pet simulator. I want the user to be able to click buttons to maintain the health, happiness, and hunger of the animal. If the user does not keep these ever-depleting status bars going, the pet dies.
+My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user can name their pet and select a cat or dog. Then, the user can click buttons to maintain the health, happiness, and hunger of the pet. If the user does not keep these ever-depleting status bars going, the pet dies and the game over screen comes up. 
 
 ***    
 
@@ -20,11 +20,11 @@ My game is going to be a pet simulator. I want the user to be able to click butt
 
 ### Initial Design
 
-![initial gui](assets/gui.jpg)
+![initial gui](assets/images/gui.jpg)
 
 ### Final Design
 
-![final gui](assets/finalgui.jpg)
+![final gui](assets/images/finalgui1.jpg)(assets/images/finalgui2.jpg)(assets/images/finalgui3.jpg)(assets/images/finalgui4.jpg)
 
 ## Program Design
 
@@ -53,18 +53,13 @@ My game is going to be a pet simulator. I want the user to be able to click butt
 
 | Step                 |Procedure             |Expected Results                   |
 |----------------------|:--------------------:|----------------------------------:|
-|  1                   | Run Counter Program  |GUI window appears with count = 0  |
-|  2                   | click count button   | display changes to count = 1      |
-etc...
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    print("Q key pressed")
-                    self.running = False
-                elif event.key == pygame.K_BACKSPACE:
-                    self.pet_name = self.pet_name[:-1]
-                elif event.key == pygame.K_RETURN:
-                    if self.pet_name:
-                        self.is_active = False
-                    else:
-                        self.pet_name += event.unicode
+|  1                   | Launch the Pixel Paws Pet Simulator Program  | GUI window opens with title "Pixel Paws Pet Simulator" and the Start Menu is displayed  |
+|  2                   | Click "Cat" button | The selected pet is "Cat" and the pet image becomes a cat |
+|  3                   | Click "Dog" button | The selected pet is "Dog" and the pet image becomes a dog |
+|  4                   | Enter a name for the pet then press Enter | The name is put on game screen, and the main game screen displays |
+|  5                   | Click "Start" button | The pet and main game screen appears |
+|  6                   | Click "Play" button | The health status bar increases, and a ball image appears on screen temporarily |
+|  7                   | Click "Feed" button | The hunger status bar increases, and a food bowl image appears on screen temporarily |
+|  8                   | Click "Pet" button | The happiness status bar increases, and a heart image appears on screen temporarily |
+|  9                   | Click "R" on Game Over screen | The start menu comes up and game restarts |
+|  10                  | Click "Q" on Game Over screen | The game window closes |
