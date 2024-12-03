@@ -24,7 +24,7 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 
 ### Final Design
 
-![final gui](assets/images/finalgui1.jpg)(assets/images/finalgui2.jpg)(assets/images/finalgui3.jpg)(assets/images/finalgui4.jpg)
+![final gui1](assets/images/finalgui1.jpg)![final gui2](assets/images/finalgui2.jpg)![final gui3](assets/images/finalgui3.jpg)![final gui4](assets/images/finalgui4.jpg)
 
 ## Program Design
 
