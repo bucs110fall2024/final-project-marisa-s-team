@@ -61,3 +61,5 @@ class StatusBar():
         font = pygame.font.Font(font_path, 10)
         label_text = font.render(self.label, True, (STAT_BAR_LABEL_COLOR))
         screen.blit(label_text, (self.x, self.y - 15))
+        
+        # UPDATE
