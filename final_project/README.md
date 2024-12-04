@@ -19,7 +19,7 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 
 ![initial gui](assets/images/gui.jpg)
 
-### Final Desig n
+### Final Design
 
 ![final gui1](assets/images/finalgui1.jpg)![final gui2](assets/images/finalgui2.jpg)![final gui3](assets/images/finalgui3.jpg)![final gui4](assets/images/finalgui4.jpg)
 
@@ -32,7 +32,6 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 3. Three buttons for user to click on game screen (play, feed, and pet) to up status bars and cause items to go on screen
 4. Updating health, hunger, and happiness bar that continuously deplete until user hits buttons
 5. Game over screen allowing user to restart or quit and see their high score
-change
 
 ### Classes
 
