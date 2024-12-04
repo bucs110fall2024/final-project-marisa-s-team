@@ -140,5 +140,3 @@ class StartMenu:
             selected_pet: The pet selection ('cat' or 'dog')
         """
         return self.selected_pet
-    
-    # UPDATE

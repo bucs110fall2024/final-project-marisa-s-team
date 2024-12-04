@@ -62,5 +62,3 @@ class HighScore:
         Returns: high_score (int): The current high score
         """
         return self.high_score
-    
-    # UPDATE

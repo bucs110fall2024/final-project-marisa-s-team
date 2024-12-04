@@ -116,5 +116,3 @@ class Pet:
         Returns: None
         """
         screen.blit(self.image, (self.x - 80, self.y - 20))
-        
-        # UPDATE

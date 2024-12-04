@@ -219,5 +219,3 @@ class Game:
             bool: Returns True if any status bars reach 0
         """
         return self.health_bar.value == 0 or self.hunger_bar.value == 0 or self.happiness_bar.value == 0
-    
-    # uPDATE
