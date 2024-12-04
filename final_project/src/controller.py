@@ -5,11 +5,11 @@ from src.startmenu import StartMenu
 from src.highscore import HighScore
 from src.game import Game
 
-# Constant
+
+# Constants
 GAME_OVER_TEXT_COLOR = (255, 255, 0)
 SCREEN_WIDTH = 800
-SCREEN_HEIGHt = 600
-FPS = 60
+SCREEN_HEIGHT = 600
 
 
 class Controller:
@@ -23,7 +23,7 @@ class Controller:
         Returns: None
         """
         pygame.init()
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHt))
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("Pixel Paws Pet Simulator")
         self.font = pygame.font.Font(os.path.join("assets", "fonts", "Daydream.ttf"), 30) #
        
