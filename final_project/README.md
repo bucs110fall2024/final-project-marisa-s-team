@@ -31,10 +31,10 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 ### Features
 
 1. Start menu that lets user name pet, and select whether they want a cat or dog pet
-2. Main game screen which has pet on it and pet's name on top of screen
+2. Main game screen which has pet on it, pet's name on top of screen, and score of the user
 3. Three buttons for user to click on game screen (play, feed, and pet) to up status bars and cause item to go on screen
 4. Updating health, hunger, and happiness bar that continuously deplete until user hits buttons
-5. Game over screen allowing user to restart or quit
+5. Game over screen allowing user to restart or quit and see their high score
 
 ### Classes
 
@@ -46,6 +46,8 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
     - Creates status bars for health, happiness, and hunger that deplete with time and determine the life of the pet
 - Game:
     - Creates game screen where the pet, buttons, and status bars are and the user can interact with the buttons
+- HighScore:
+    - Keeps track of user's high score, displays it on game over screen, and sends it to a JSON file
 - Controller:
     - Puts the objects together, creating the game itself and a game over screen
 

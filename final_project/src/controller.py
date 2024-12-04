@@ -3,8 +3,15 @@ import os
 import sys
 from src.startmenu import StartMenu
 from src.game import Game
+from src.highscore import HighScore
+
+# Constant
+GAME_OVER_TEXT_COLOR = (255, 255, 0)
 
 class Controller:
+    """
+    The Controller class which manages the game loop, main menu, and game over screen
+    """
     def __init__(self):
         """
         Initializes the Controller object
@@ -12,12 +19,12 @@ class Controller:
         Returns: None
         """
         pygame.init()
-        print("Controller initialized.")
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("Pixel Paws Pet Simulator")
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         self.font = pygame.font.Font(font_path, 30)
         self.is_running = True
+        self.high_score_manager = HighScore()
         
     def mainloop(self):
         """
@@ -25,13 +32,12 @@ class Controller:
         Args: None
         Returns: None
         """
-        print("Starting main loop")
-        
         pygame.mixer.init()   
         music_file = os.path.join("assets", "music", "background_music.mp3")
         pygame.mixer.music.load(music_file)
         pygame.mixer.music.play(loops=-1, start=0.0)
-               
+        
+        # Main menu loop      
         start_menu = StartMenu(self.screen, self.font)
         while start_menu.is_active:
             events = pygame.event.get()
@@ -45,13 +51,14 @@ class Controller:
             
             start_menu.draw()
             pygame.display.flip()
-            
+        
+        # Gets pet name and selection from start menu    
         pet_name = start_menu.get_pet_name()
         selected_pet = start_menu.get_selected_pet()
-        print(f"Pet Name: {pet_name}, Selected Pet: {selected_pet}")
         
         game = Game(self.screen, self.font, pet_name, selected_pet, start_menu.cat_button, start_menu.dog_button, start_menu.start_button)
-            
+        
+        # Game loop   
         while self.is_running:
             events = pygame.event.get()
             
@@ -72,8 +79,6 @@ class Controller:
             
             pygame.display.flip()
         
-        print("Exiting main loop")
-        
         pygame.quit()
         sys.exit()
         
@@ -81,21 +86,28 @@ class Controller:
         """
         Initializes game over screen
         Args:
-            game (object): game model
+            game (object): The game model
         Returns: None
         """
+        # Creates game over screen background
         background_image_path = os.path.join("assets", "images", "game_over_background.jpg")
         background = pygame.image.load(background_image_path)
         background = pygame.transform.scale(background, (800, 600))
         
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         font = pygame.font.Font(font_path, 20)
-        game_over_text = font.render(f"{game.pet_name} Died!", True, (255, 255, 0))
-        option_game_over_text = font.render("Press 'R' to restart or 'Q' to quit.", True, (255, 255, 0))
+        game_over_text = font.render("Your Pet Died!", True, (GAME_OVER_TEXT_COLOR))
+        option_game_over_text = font.render("Press 'R' to restart or 'Q' to quit.", True, (GAME_OVER_TEXT_COLOR))
         
+        final_score = game.get_score()
+        self.high_score_manager.update_high_score(final_score)
+        high_score_text = font.render(f"High Score: {self.high_score_manager.get_high_score()}", True, (GAME_OVER_TEXT_COLOR))
+        
+        # Blits background and game over text
         self.screen.blit(background, (0, 0))        
-        self.screen.blit(game_over_text, (290, 100))
+        self.screen.blit(game_over_text, (280, 100))
         self.screen.blit(option_game_over_text, (110, 150))
+        self.screen.blit(high_score_text, (280, 200))
         pygame.display.flip()
         
         waiting_for_input = True
