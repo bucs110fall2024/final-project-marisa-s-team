@@ -127,5 +127,3 @@ class Controller:
                     elif event.key == pygame.K_q:
                         self.is_running = False
                         waiting_for_input = False
-                        
-                    # UPDATE
