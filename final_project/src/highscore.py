@@ -6,11 +6,11 @@ HIGH_SCORE_FILE = "etc/highscore.json"
 
 class HighScore:
     """
-    HighScore class that loads, saves, and updates the high score
+    HighScore class which loads, saves, and updates the high score
     """
     def __init__(self):
         """
-        Initializes Highscore object and loads the pre-existing high score
+        Initializes Highscore object which starts at 0 and loads previous high score
         Args: None
         Returns: None
         """
@@ -19,10 +19,9 @@ class HighScore:
         
     def load_high_score(self):
         """
-        Loads the high score from the JSON file and if the file
-        does not exist or is invalid, sets the high score to 0
+        Loads the high score from the JSON file and if the file does not exist or is invalid, sets the high score to 0
         Args: None
-        Retusn: None
+        Returns: None
         """
         if os.path.exists(HIGH_SCORE_FILE):
             with open(HIGH_SCORE_FILE, "r") as file:

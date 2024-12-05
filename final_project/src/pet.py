@@ -9,8 +9,7 @@ HAPPINESS_DEPLETION_RATE = 0.0008
 
 class Pet:
     """
-    Pet class that represents the state of the pet (health, hunger, happiness)
-    and allows user to interact with the pet
+    Pet class which represents the state of the pet (health, hunger, happiness) and allows user to interact with the pet
     """
     def __init__(self, x, y, image_path):
         """
@@ -25,16 +24,17 @@ class Pet:
         self.y = y
         self.image_path = image_path
         
-        # Loads pet images and scales them
+        # Loads pet image and scales it
         self.image = pygame.image.load(image_path) 
         self.image = pygame.transform.scale(self.image, (350, 350))
         
-        # Pet status
+        # Creates pet status
         self.alive = True
         self.health = FULL_STATUS
         self.hunger = FULL_STATUS
         self.happiness = FULL_STATUS
         
+        # Creates status bar depletion rates
         self.health_depletion_rate = HEALTH_DEPLETION_RATE
         self.hunger_depletion_rate = HUNGER_DEPLETION_RATE
         self.happiness_depletion_rate = HAPPINESS_DEPLETION_RATE
@@ -46,6 +46,7 @@ class Pet:
             delta_time (float): The time passed since the last status update
         Returns: None
         """
+        # Determines how status depletes and when pet is alive
         if self.alive:
             if self.health > END_STATUS:
                 self.health -= 0.03
@@ -64,6 +65,7 @@ class Pet:
         self.hunger = max(END_STATUS, self.hunger)
         self.happiness = max(END_STATUS, self.happiness)
         
+        # Determines how status bars affect pet death
         if self.hunger <= END_STATUS or self.health <= END_STATUS or self.happiness <= END_STATUS:
             self.die()
         

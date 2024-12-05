@@ -42,11 +42,13 @@ class StartMenu:
             events (list): List of events to be handled
         Returns: None
         """
+        # Allows user to quit window
         for event in events:
             if event.type == pygame.QUIT:
                 self.is_active = False
                 return
-                
+            
+            # Allows user to select pet type and start game    
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.cat_button.collidepoint(event.pos):
                     self.selected_pet = 'cat'
@@ -54,12 +56,14 @@ class StartMenu:
                     self.selected_pet = 'dog'
                 elif self.start_button.collidepoint(event.pos) and self.pet_name and self.selected_pet:
                     self.is_active = False
-            
+
+                # Allows user to select pet name box
                 if self.input_box.collidepoint(event.pos):
                     self.active_input = True
                 else:
                    self.active_input = False
-                    
+            
+            # Allows user to input pet name        
             if event.type == pygame.KEYDOWN:
                 if self.active_input:
                     if event.key == pygame.K_BACKSPACE:
@@ -89,7 +93,7 @@ class StartMenu:
         # Gets mouse position
         mouse_pos = pygame.mouse.get_pos()
         
-        # Buttons with their properties
+        # Pet buttons with their properties
         button_data = [
             (self.cat_button, CAT_BUTTON_COLOR, "Cat", 2, 8),
             (self.dog_button, DOG_BUTTON_COLOR, "Dog", 2, 8)
@@ -106,7 +110,7 @@ class StartMenu:
             button_text = self.font.render(text, True, (START_MENU_TEXT_COLOR))
             self.screen.blit(button_text, (button.x + x_offset, button.y + y_offset))
         
-        # Draws input box and text
+        # Draws input box and text above it
         pygame.draw.rect(self.screen, (NAME_RECTANGLE_COLOR), self.input_box, 2)
         input_text = self.font.render(self.pet_name, True, (START_MENU_TEXT_COLOR))
         name_text = self.font.render("Name Your Pet:", True, (START_MENU_TEXT_COLOR))

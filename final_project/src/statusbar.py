@@ -9,7 +9,7 @@ STAT_BAR_LABEL_COLOR = (255, 255, 255)
 
 class StatusBar():
     """
-    StatusBar classs which creates and updates the three status bars (health, hunger, and happiness)
+    StatusBar class which creates and updates the three status bars (health, hunger, and happiness)
     """
     def __init__(self, x, y, w, h, max_value, label, depletion_rate):
         """
@@ -35,7 +35,7 @@ class StatusBar():
         
     def update(self, delta_time):
         """
-        Updates status bar to deplete with time
+        Decreases the value of the status bar over time depending on depletion rate
         Args:
             delta_time (int): The time passed since the last update
         Returns: None
@@ -47,9 +47,9 @@ class StatusBar():
                
     def draw(self, screen):
         """
-        Draws status bars
+        Draws status bar
         Args:
-            screen (pygame.Surface): The surface to draw status bars
+            screen (pygame.Surface): The surface to draw status bar
         Returns: None
         """
         pygame.draw.rect(screen, (DEPLETION_STAT_BAR_COLOR), (self.x, self.y, self.w, self.h))
@@ -57,6 +57,7 @@ class StatusBar():
         fill_width = (self.value / self.max_value) * self.w
         pygame.draw.rect(screen, (FULL_STAT_BAR_COLOR), (self.x, self.y, fill_width, self.h))
         
+        # Titles status bar
         font_path = os.path.join("assets", "fonts", "Daydream.ttf")
         font = pygame.font.Font(font_path, 10)
         label_text = font.render(self.label, True, (STAT_BAR_LABEL_COLOR))

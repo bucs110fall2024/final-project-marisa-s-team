@@ -17,8 +17,8 @@ INTERACTION_TIMERS = 0
 
 class Game:
     """
-    The Game class which creates the game logic, event handling, updates status bars, 
-    draws the screen, and reacts to user ineractions
+    The Game class which creates the game logic, event handling, updates status bars, draws the screen, and reacts to user 
+    interactions
     """
     def __init__(self, screen, font, pet_name, selected_pet, cat_button, dog_button, start_button):
         """
@@ -33,6 +33,7 @@ class Game:
             start_button (pygame.Rect): The start button
         Returns: None
         """
+        # Creates game components
         self.screen = screen
         self.font = font
         self.pet_name = pet_name
@@ -44,10 +45,12 @@ class Game:
         self.score = 0
         self.start_time = pygame.time.get_ticks()
         
+        # Creates pet status bars
         self.health_bar = StatusBar(500, 20, 300, 40, 100, "Health", HEALTH_DEPLETION_RATE)
         self.hunger_bar = StatusBar(500, 80, 300, 40, 100, "Hunger", HUNGER_DEPLETION_RATE)
         self.happiness_bar = StatusBar(500, 140, 300, 40, 100, "Happiness", HAPPINESS_DEPLETION_RATE)
         
+        # Depending on selected pet, makes a cat or dog come on screen
         if self.selected_pet == 'cat':
             self.pet = Pet(PET_X_POSITION, PET_Y_POSITION, "assets/images/cat.png")
         elif self.selected_pet == 'dog':
@@ -78,8 +81,7 @@ class Game:
             'feed': pygame.Rect(175, 520, 100, 50),
             'pet': pygame.Rect(300, 520, 100, 50)
         }
-        
-        
+              
     def handle_events(self, events):
         """
         Initializes event handling in the game loop
@@ -87,10 +89,12 @@ class Game:
             events (list): List of events that need to be processed in the game
         Returns: None
         """        
+        # Allows user to quit window
         for event in events:
             if event.type == pygame.QUIT:
                 self.running = False
 
+            # Causes button pressing to present image and increase associated status bar
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.buttons['pet'].collidepoint(event.pos):
                     self.pet.pet()
@@ -116,18 +120,23 @@ class Game:
         Returns: 
             bool: Returns True if game is over, or False if it is not over
         """
+        # Updates time
         self.pet.update(delta_time)
         
+        # Updates score
         self.score = (pygame.time.get_ticks() - self.start_time) // 1000
         
+        # Updates status bars
         self.health_bar.update(delta_time)
         self.hunger_bar.update(delta_time)
         self.happiness_bar.update(delta_time)
-                
+        
+        # Determines if game is over        
         if self.is_game_over():
             self.running = False
             return True
         
+        # Determines how long images stay on screen
         current_time = pygame.time.get_ticks()
         if current_time - self.food_bowl_timer > TIME_OF_ITEM_ON_SCREEN:
             self.show_food_bowl = False
@@ -144,15 +153,16 @@ class Game:
         Args: None
         Returns: None
         """
-        # Creates background
+        # Draws background
         background_image_path = os.path.join("assets", "images", "start_menu_background.jpg")
         background = pygame.image.load(background_image_path)
         background = pygame.transform.scale(background, (800, 600))
         self.screen.blit(background, (0, 0))
         
+        # Draws pet
         self.pet.draw(self.screen)
         
-        # Updates status bars
+        # Coordinates pet status with status bars
         hunger, health, happiness = self.pet.get_status()
         self.health_bar.value = health
         self.hunger_bar.value = hunger
@@ -166,7 +176,7 @@ class Game:
         # Gets mouse position
         mouse_pos = pygame.mouse.get_pos()
         
-        # Button hover effect
+        # Creates button hover effect
         for button_key, button_rect in self.buttons.items():
             if button_rect.collidepoint(mouse_pos):
                 pygame.draw.rect(self.screen, (150, 200, 200), button_rect)
@@ -181,7 +191,7 @@ class Game:
         pet_text = button_font.render("Pet", True, (BUTTON_TEXT_COLOR))
         score_text = self.font.render(f"Score: {self.score}", True, (BUTTON_TEXT_COLOR))
            
-        # Blit texts
+        # Blit button labels
         self.screen.blit(score_text, (10, 60))
         self.screen.blit(play_text, (self.buttons['play'].x + 10, self.buttons['play'].y + 15))
         self.screen.blit(feed_text, (self.buttons['feed'].x + 10, self.buttons['feed'].y + 15))
@@ -191,7 +201,7 @@ class Game:
         pet_name_text = self.font.render(f"Name: {self.pet_name}", True, (NAME_TEXT_COLOR))
         self.screen.blit(pet_name_text, (10, 10))
         
-        # Positions images put on screen by user interaction        
+        # Positions images put on screen by button clicks       
         self.food_bowl_position = (self.pet.x - 60, self.pet.y + 160)
         self.heart_position = (self.pet.x + 70, self.pet.y - 50)
         self.ball_position = (self.pet.x - 80, self.pet.y - 70)
