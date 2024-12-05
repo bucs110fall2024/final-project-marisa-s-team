@@ -1,5 +1,5 @@
 # Pixel Paws Pet Simulator
-## CS110 Final Project  Fall, 2024
+## CS 110 Final Project  Fall, 2024
 
 ## Team Members
 
@@ -42,7 +42,7 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 - StatusBar:
     - Creates status bars for health, happiness, and hunger that deplete with time and determine the life of the pet
 - Game:
-    - Creates game screen where the pet, buttons, and status bars are and the user can interact with the buttons
+    - Creates game screen where the pet, buttons, status bars, pet name, score, and pet are and the user can interact with the buttons
 - HighScore:
     - Keeps track of user's high score, displays it on game over screen, and sends it to a JSON file
 - Controller:
@@ -56,7 +56,7 @@ My game is a pet simulator, inspired by Tomagatchi. In the start menu, the user 
 |  2                   | Click "Cat" button | The selected pet is "Cat" and the pet image becomes a cat |
 |  3                   | Click "Dog" button | The selected pet is "Dog" and the pet image becomes a dog |
 |  4                   | Enter a name for the pet then press Enter | The name is put on game screen, and the main game screen displays |
-|  5                   | Click "Start" button | The pet and main game screen appears |
+|  5                   | Click "Start" button | The main game screen appears |
 |  6                   | Click "Play" button | The health status bar increases, and a ball image appears on screen temporarily |
 |  7                   | Click "Feed" button | The hunger status bar increases, and a food bowl image appears on screen temporarily |
 |  8                   | Click "Pet" button | The happiness status bar increases, and a heart image appears on screen temporarily |
